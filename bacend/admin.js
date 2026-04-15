@@ -109,19 +109,21 @@ function renderLeads() {
         <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Waktu</th>
         <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Nama</th>
         <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Email</th>
-        <th class="px-4 py-3 text-left text-sm font-semibold text-slate-700">Pesan</th>
+        <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-slate-700">Subjek</th>
+        <th class="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-slate-700">Pesan</th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-slate-200"></tbody>
+    <tbody class="divide-y divide-slate-200 bg-white">
   `;
   const tbody = table.querySelector('tbody');
   settings.leads.slice().reverse().forEach((lead) => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td class="px-4 py-3 text-sm text-slate-600">${new Date(lead.createdAt).toLocaleString()}</td>
-      <td class="px-4 py-3 text-sm text-slate-600">${lead.name}</td>
-      <td class="px-4 py-3 text-sm text-slate-600">${lead.email}</td>
-      <td class="px-4 py-3 text-sm text-slate-600">${lead.message}</td>
+      <td class="px-4 py-3 text-xs sm:text-sm text-slate-600">${new Date(lead.createdAt).toLocaleString('id-ID')}</td>
+      <td class="px-4 py-3 text-xs sm:text-sm font-medium text-slate-800">${lead.name}</td>
+      <td class="px-2 sm:px-4 py-3 text-xs sm:text-sm text-blue-600 truncate max-w-[150px] sm:max-w-none hover:underline">${lead.email}</td>
+      <td class="px-4 py-3 text-xs sm:text-sm font-semibold bg-yellow-50 text-yellow-800 px-3 py-1 rounded-full max-w-[120px] truncate">${lead.subject || 'General'}</td>
+      <td class="px-4 py-3 text-xs sm:text-sm text-slate-600 max-w-[200px] sm:max-w-none truncate">${lead.message?.substring(0, 100)}${lead.message && lead.message.length > 100 ? '...' : ''}</td>
     `;
     tbody.appendChild(row);
   });

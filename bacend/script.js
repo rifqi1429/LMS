@@ -15,7 +15,7 @@ const featureData = {
   },
   4: {
     image: "../asset/Nilai.png",
-    title: "Pengaturan Jadwal Belajar"
+    title: "Rekap Nilai & Laporan"
   }
 };
 
@@ -214,30 +214,76 @@ window.addEventListener('load', () => {
   }
 });
 
-// Mobile Menu Toggle
-document.addEventListener('DOMContentLoaded', () => {
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
+/* MOBILE MENU - ENHANCED RESPONSIVE */
+function toggleMobileMenu() {
   const mobileMenu = document.getElementById('mobile-menu');
+  const body = document.body;
+  const overlay = document.getElementById('mobile-overlay') || createMobileOverlay();
+  
+  mobileMenu.classList.toggle('active');
+  overlay.classList.toggle('active');
+  body.classList.toggle('no-scroll');
+  
+  // Close when clicking outside
+  overlay.onclick = () => toggleMobileMenu();
+}
 
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
+function createMobileOverlay() {
+  const overlay = document.createElement('div');
+  overlay.id = 'mobile-overlay';
+  overlay.className = 'fixed inset-0 bg-black/50 z-40 lg:hidden opacity-0 invisible transition-all duration-300';
+  overlay.classList.toggle('active', true);
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+// Enhanced DOMContentLoaded mobile init
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileBtn = document.getElementById('mobile-menu-button');
+  if (mobileBtn) {
+    mobileBtn.onclick = toggleMobileMenu;
+    
+    // Keyboard support
+    mobileBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMobileMenu();
+      }
     });
   }
 
+  // Close menu on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      document.body.classList.remove('no-scroll');
+      const menu = document.getElementById('mobile-menu');
+      const overlay = document.getElementById('mobile-overlay');
+      if (menu) menu.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+    }
+  });
+
+
+
+  // Enhanced back-to-top with mobile positioning
   const backToTopButton = document.createElement('button');
   backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-  backToTopButton.className = 'back-to-top';
+  backToTopButton.className = 'fixed bottom-6 right-6 lg:bottom-8 lg:right-8 w-12 h-12 rounded-full bg-green-600 text-white shadow-lg hover:shadow-xl hover:bg-green-700 active:scale-95 transition-all duration-200 z-40 md:w-14 md:h-14';
   backToTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   document.body.appendChild(backToTopButton);
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      backToTopButton.classList.add('show');
+    if (window.scrollY > 400) {
+      backToTopButton.style.opacity = '1';
+      backToTopButton.style.visibility = 'visible';
+      backToTopButton.style.transform = 'translateY(0)';
     } else {
-      backToTopButton.classList.remove('show');
+      backToTopButton.style.opacity = '0';
+      backToTopButton.style.visibility = 'hidden';
+      backToTopButton.style.transform = 'translateY(20px)';
     }
   });
+
 
   setTimeout(() => {
     openPopup();
