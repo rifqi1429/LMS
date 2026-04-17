@@ -1,218 +1,207 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
-  <link rel="icon" href="../asset/logo.png" type="image/x-icon">
+  <link rel="icon" href="https://zenmultimedia.co.id/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ - ZMI LMS</title>
-  <meta name="description" content="Pertanyaan yang Sering Diajukan tentang ZMI LMS. Jawaban lengkap untuk semua fitur." />
+  <title>FAQ - Pertanyaan Sering Diajukan | Skol-up LMS</title>
+  <meta name="description" content="FAQ lengkap Skol-up LMS. Jawaban untuk pertanyaan umum tentang login, materi, ujian, nilai, dan fitur platform." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .hero-gradient { background: linear-gradient(rgba(57, 177, 101, 0.8), rgba(25, 51, 27, 0.9)); }
-    .faq-item summary { cursor: pointer; }
-    .faq-item summary:hover { color: #10b981; }
-  </style>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">    
 </head>
-<body class="bg-white text-gray-800">
-  <!-- Nav -->
-  <nav class="fixed w-full z-50 flex justify-between items-center px-6 md:px-12 py-4 bg-white/95 backdrop-blur-md shadow-sm">
-    <div class="logo flex items-center gap-2">
-      <img src="../asset/Copilot_20260406_103147.png" alt="Logo" class="h-12 w-auto">
-    </div>
-<ul class="hidden lg:flex space-x-8 text-sm font-medium uppercase tracking-wide">
-      <li><a href="LMS.html#home" class="hover:text-green-600 transition-colors">Beranda</a></li>
-      <li><a href="LMS.html#about" class="hover:text-green-600 transition-colors">Tentang Kami</a></li>
-      <li><a href="LMS.html#features" class="hover:text-green-600 transition-colors">Fitur Utama</a></li>
-      <li><a href="LMS.html#workflow" class="hover:text-green-600 transition-colors">Alur Kerja</a></li>
-      <li class="relative">
-        <span class="text-green-600 font-bold cursor-pointer flex items-center gap-1" onclick="toggleDropdown()">Bantuan <i class="fas fa-chevron-down text-xs"></i></span>
-        <div id="bantuan-dropdown" class="absolute hidden bg-white shadow-xl rounded-xl mt-2 py-2 w-48 z-50 border border-gray-200">
-          <a href="faq.html" class="block px-4 py-2 hover:bg-green-50 text-sm bg-green-50 text-green-600">FAQ</a>
-          <a href="hubungi-kami.html" class="block px-4 py-2 hover:bg-green-50 text-sm">Hubungi Kami</a>
-          <a href="syarat-ketentuan.html" class="block px-4 py-2 hover:bg-green-50 text-sm">Syarat & Ketentuan</a>
-        </div>
-      </li>
-    </ul>
 
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" aria-label="Toggle Menu">
-      <i class="fas fa-bars text-xl text-slate-900"></i>
-    </button>
+<body class="bg-gray-50">
 
-    <!-- Mobile Menu Off-Canvas -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white shadow-2xl transform translate-x-full z-50 lg:hidden transition-transform duration-300 ease-in-out">
-      <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="../asset/Copilot_20260406_103147.png" alt="Logo" class="h-10 w-auto">
-          <span class="font-bold text-lg">ZMI LMS</span>
-        </div>
-        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" aria-label="Close Menu">
-          <i class="fas fa-times text-xl text-slate-900"></i>
+  <!-- Header/Nav same structure, FAQ active -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="LMS.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-gray-900">Skol-up</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="LMS.html#beranda" class="text-sm font-medium text-gray-600 hover:text-gray-900">Beranda</a>
+          <a href="LMS.html#Fitur" class="text-sm font-medium text-gray-600 hover:text-gray-900">Fitur</a>
+          <a href="Pusat-Bantuan.html" class="text-sm font-bold text-green-600 bg-green-100 px-4 py-2 rounded-full">Pusat Bantuan</a>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
         </button>
       </div>
-      
-      <nav class="p-6 space-y-4 pt-4">
-        <a href="LMS.html#home" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-home mr-3"></i>Beranda
-        </a>
-        <a href="LMS.html#about" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-info-circle mr-3"></i>Tentang Kami
-        </a>
-        <a href="LMS.html#features" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-star mr-3"></i>Fitur Utama
-        </a>
-        <a href="LMS.html#workflow" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-cogs mr-3"></i>Alur Kerja
-        </a>
-        <a href="faq.html" class="block py-3 px-4 rounded-xl font-medium bg-green-50 text-green-600 border-l-4 border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-question-circle mr-3"></i>FAQ
-        </a>
-        <a href="hubungi-kami.html" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-envelope mr-3"></i>Hubungi Kami
-        </a>
-        <a href="syarat-ketentuan.html" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-file-contract mr-3"></i>Syarat & Ketentuan
-        </a>
-      </nav>
-      
-      <div class="p-6 border-t border-gray-200 mt-auto">
-        <a href="LMS.html" class="w-full block bg-green-600 text-white py-3 px-6 rounded-xl font-semibold text-center hover:bg-green-700 transition-all shadow-md">
-          Kembali Beranda
-        </a>
-      </div>
     </div>
-    <a href="LMS.html" class="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-all md:ml-auto">Kembali ke Beranda</a>
-  </nav>
+  </header>
 
-  <section class="relative min-h-screen flex items-center bg-cover bg-center pt-20" style="background-image: url('../asset/bg.png');">
-    <div class="absolute inset-0 hero-gradient"></div>
-    <div class="container mx-auto px-6 relative z-10 text-white text-center">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-6">Pertanyaan yang Sering Diajukan</h1>
-      <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto">Dapatkan jawaban instan untuk pertanyaan umum tentang ZMI LMS</p>
-      <a href="#faq-list" class="bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all">Lihat FAQ</a>
+  <!-- Hero -->
+  <section class="pt-24 pb-20 bg-gradient-to-br from-green-600 to-emerald-700 text-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <i class="fas fa-question-circle text-6xl mb-6 opacity-90"></i>
+      <h1 class="text-4xl lg:text-5xl font-bold mb-6">Pertanyaan Sering<br>Diujukan (FAQ)</h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto leading-relaxed">Temukan jawaban untuk pertanyaan paling umum tentang Skol-up LMS</p>
     </div>
   </section>
 
-  <section id="faq-list" class="py-24 bg-gray-50">
+  <!-- FAQ Accordion -->
+  <section class="py-24 -mt-12 relative">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="space-y-4 mb-20" data-aos="fade-up">
-        <h2 class="text-4xl font-bold text-center mb-6">FAQ Populer</h2>
-        <p class="text-xl text-center text-gray-600">Klik pertanyaan untuk melihat jawaban lengkap</p>
+      <div class="grid gap-4">
+        
+        <!-- Login & Akun -->
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Bagaimana cara login ke dashboard guru?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p class="text-gray-700 leading-relaxed">Kunjungi <strong>LMS.html</strong> → klik "Masuk Dashboard". Gunakan username dan password yang diberikan sekolah/admin. Jika lupa password, hubungi admin sekolah atau support kami.</p>
+          </div>
+        </div>
+
+        <!-- Materi -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Cara mengupload materi pembelajaran?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <div class="space-y-3">
+              <p>1. Login ke dashboard → pilih mata pelajaran</p>
+              <p>2. Menu <strong>"Topik & Materi"</strong> → "Tambah Materi Baru"</p>
+              <p>3. Upload PDF/video/slide → atur urutan bab → "Simpan & Publikasikan"</p>
+              <p><strong>Format didukung:</strong> PDF, MP4, PPTX, JPG/PNG (max 100MB)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ujian -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Bagaimana membuat ujian online?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Menu <strong>"Tugas & Ujian"</strong> → "Buat Ujian Baru" → Pilih tipe (Pilihan Ganda/Essay) → Tambah soal → Set timer & passing grade → Jadwalkan → Publikasikan.</p>
+          </div>
+        </div>
+
+        <!-- Nilai -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Di mana melihat rekap nilai siswa?  
+</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p><strong>"Rekapitulasi Nilai"</strong> → Filter kelas/mata pelajaran → Lihat grafik & detail → Export PDF/Excel untuk rapor.</p>
+          </div>
+        </div>
+
+        <!-- Jadwal -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Cara mengatur jadwal kelas?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Menu <strong>"Manajemen Jadwal"</strong> → Tambah pertemuan → Set tanggal/waktu → Assign materi/tugas → Notifikasi otomatis ke siswa.</p>
+          </div>
+        </div>
+
+        <!-- Laporan -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Apakah ada fitur laporan hasil belajar?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Ya! Menu <strong>"Laporan Hasil Belajar"</strong> → Generate laporan per siswa/kelas → Format PDF profesional untuk orang tua & kepsek.</p>
+          </div>
+        </div>
+        <!-- Support -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="700">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Jam operasional support?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p><strong>24/7 via WhatsApp</strong><br>
+            Senin-Jumat: 08:00 - 20:00 WIB<br>
+            Weekend: 09:00 - 17:00 WIB</p>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="800">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="font-semibold text-lg">Apakah support mobile app?</span>
+            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+          </div>
+          <div class="accordion-content">
+            <p>Ya! Responsive web app untuk Android/iOS. Login via browser → "Tambah ke Home Screen" untuk pengalaman native.</p>
+          </div>
+        </div>
+
       </div>
 
-<div class="space-y-4 max-h-[60vh] sm:max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" data-aos="fade-up" data-aos-delay="100">
-        <details class="faq-item bg-white rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl p-6 sm:p-8 border-l-4 sm:border-l-8 border-green-500 hover:shadow-xl transition-all">
-          <summary class="font-bold text-lg sm:text-xl mb-3 sm:mb-4 cursor-pointer list-none group">
-            <span class="inline-flex items-center gap-2 group-hover:text-green-600 transition-colors">
-              <i class="fas fa-chevron-right text-green-500 group-open:-rotate-90 transition-transform"></i>
-              Bagaimana cara membuat akun ZMI LMS?
-            </span>
-          </summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Hubungi tim sales kami melalui WhatsApp atau email untuk aktivasi akun sekolah gratis trial 30 hari.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Apakah ada biaya langganan?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Ya, mulai Rp 50.000/bulan per kelas. Ada paket sekolah dengan diskon volume. Kontak sales untuk penawaran.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Bagaimana upload materi pelajaran?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Masuk ke Material Section → Pilih topik → Upload PDF/video max 500MB → Publikasikan ke siswa.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Apakah mendukung ujian online?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Ya, bank soal otomatis, timer, random soal, penilaian instan dengan laporan grafik.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Bisa export rapor siswa?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Ya, format PDF/Excel dengan cap sekolah, nilai lengkap, dan grafik progres belajar.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Apakah data aman?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>Data dienkripsi SSL, backup harian, compliant PDPA. Akses role-based untuk guru & admin sekolah.</p>
-          </div>
-        </details>
-        <details class="faq-item bg-white rounded-3xl shadow-xl p-8 border-l-8 border-green-500">
-          <summary class="font-bold text-xl mb-4 cursor-pointer list-none">Support berbahasa Indonesia?</summary>
-          <div class="pl-8 mt-4 text-gray-700">
-            <p>100% full Indonesia. Tim support lokal 24/7 via WhatsApp/Telegram.</p>
-          </div>
-        </details>
+      <!-- CTA -->
+      <div class="mt-20 p-12 bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl text-white text-center" data-aos="zoom-in" data-aos-delay="900">
+        <h2 class="text-3xl font-bold mb-4">Belum menemukan jawaban?</h2>
+        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Hubungi tim support kami untuk bantuan personal</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="Hubungi-Kami.html" class="px-8 py-4 bg-white text-green-600 font-bold rounded-2xl hover:bg-gray-50 transition-all shadow-2xl">Hubungi Support</a>
+          <a href="Pusat-Bantuan.html" class="px-8 py-4 border-2 border-white text-white font-bold rounded-2xl hover:bg-white hover:text-green-600 transition-all">Kembali ke Pusat Bantuan</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer with Bantuan column -->
-  <footer class="bg-gray-700 text-white py-12 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div>
-          <h3 class="font-bold text-lg mb-4">Alamat</h3>
-          <p class="text-sm leading-relaxed text-slate-300">Jl. Taman Pahlawan No.166, Purwamekar, Kec. Purwakarta, Kabupaten Purwakarta, Jawa Barat 41119</p>
-          <h3 class="font-bold text-lg mt-8 mb-4">Social Media</h3>
-          <div class="flex gap-4">
-            <a href="https://facebook.com" class="hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a>
-            <a href="https://youtube.com" class="hover:text-red-500"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/6285121045798" class="hover:text-green-400"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Hubungi</h3>
-          <div class="space-y-3 text-sm">
-            <div class="flex items-center gap-3"><i class="fab fa-whatsapp text-lg"></i><span>6285121045798</span></div>
-            <div class="flex items-center gap-3"><i class="far fa-envelope text-lg"></i><span>info@zenmultimedia.co.id</span></div>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Product</h3>
-          <a href="https://www.ditiketin.com/" class="hover:underline">Ditiketin</a>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Bantuan</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="faq.html" class="hover:underline">FAQ</a></li>
-            <li><a href="hubungi-kami.html" class="hover:underline">Hubungi Kami</a></li>
-            <li><a href="syarat-ketentuan.html" class="hover:underline">Syarat & Ketentuan</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-blue-800 mt-12 pt-8 text-center text-sm text-slate-400">
-        <p>© 2025 zenmultimedia.co.id</p>
+  <!-- Footer same as LMS.html -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Standard footer content -->
+      <div class="text-center text-sm py-8 border-t border-gray-800">
+        © 2025 Skol-up LMS. Semua hak dilindungi.
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="../bacend/script.js"></script>
-<script>
-  AOS.init({ duration: 800, once: true });
-  function toggleDropdown() {
-    const dropdown = document.getElementById('bantuan-dropdown');
-    dropdown.classList.toggle('hidden');
-  }
-  document.addEventListener('click', function(e) {
-    const navBtn = document.querySelector('.relative span');
-    const dropdown = document.getElementById('bantuan-dropdown');
-    if (!navBtn.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.classList.add('hidden');
+  <script>
+    AOS.init({ duration: 800, once: true });
+    
+    function toggleAccordion(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('i');
+      const isActive = content.classList.contains('active');
+      
+      // Close all others
+      document.querySelectorAll('.accordion-content').forEach(c => {
+        c.classList.remove('active');
+        c.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+      });
+      
+      if (!isActive) {
+        content.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+      }
     }
-  });
-</script>
+    
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.querySelector('.accordion-header');
+      // Add search logic if needed
+    });
+  </script>
 </body>
-</html>
 
+</html>

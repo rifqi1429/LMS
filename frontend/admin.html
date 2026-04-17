@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,220 +7,328 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .sidebar { background: linear-gradient(180deg, #10b981 0%, #059669 100%); }
-    .tab-active { @apply bg-white text-green-700 shadow-lg; }
-    .image-preview { max-height: 200px; object-fit: cover; }
+    .sidebar-btn.active {
+      background-color: white;
+      color: #16a34a;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
   </style>
 </head>
 
 <body class="bg-slate-100 text-slate-900">
-  <div class="min-h-screen">
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
-        <div>
-          <h1 class="text-xl font-bold">Backoffice ZMI LMS</h1>
-          <p class="text-sm text-slate-500">Kelola konten landing page, leads, user, dan SEO.</p>
-        </div>
+  <div class="flex min-h-screen">
+    <aside class="w-64 bg-green-600 text-white p-6 hidden lg:block">
+      <div class="mb-10">
+        <h1 class="text-xl font-bold">ZMI Backoffice</h1>
+        <p class="text-xs opacity-75">Control Panel v1.0</p>
       </div>
-    </header>
+      <nav class="space-y-2">
+        <button onclick="showTab('content', this)" class="sidebar-btn active w-full text-left p-3 rounded-xl transition-all flex items-center">
+          <i class="fas fa-edit mr-3"></i> Konten Landing
+        </button>
+        <button onclick="showTab('images', this)" class="sidebar-btn w-full text-left p-3 rounded-xl transition-all flex items-center">
+          <i class="fas fa-image mr-3"></i> Upload Gambar
+        </button>
+        <button onclick="showTab('users', this)" class="sidebar-btn w-full text-left p-3 rounded-xl transition-all flex items-center">
+          <i class="fas fa-users mr-3"></i> Manajemen User
+        </button>
+        <button onclick="showTab('leads', this)" class="sidebar-btn w-full text-left p-3 rounded-xl transition-all flex items-center">
+          <i class="fas fa-envelope mr-3"></i> Leads / Form
+        </button>
+        <button onclick="showTab('seo', this)" class="sidebar-btn w-full text-left p-3 rounded-xl transition-all flex items-center">
+          <i class="fas fa-search mr-3"></i> SEO & Sosmed
+        </button>
+      </nav>
+    </aside>
 
-    <main class="max-w-7xl mx-auto px-6 py-10">
-      <div id="login-card" class="max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8">
-        <h2 class="text-2xl font-bold mb-4">Login Admin</h2>
-        <p class="text-slate-500 mb-6">Masuk dengan akun admin untuk membuka panel pengaturan.</p>
-        <form id="admin-login-form" class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium mb-2">Username</label>
-            <input id="login-username" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" required />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-2">Password</label>
-            <input id="login-password" type="password" class="w-full rounded-2xl border border-slate-300 px-4 py-3" required />
-          </div>
-          <button type="submit" class="w-full bg-green-600 text-white rounded-2xl px-4 py-3 font-semibold hover:bg-green-700 transition">Masuk</button>
-          <p id="login-error" class="text-sm text-red-600 hidden">Username atau password salah.</p>
-        </form>
-      </div>
+    <main class="flex-1 p-4 md:p-8">
+      <header class="flex justify-between items-center mb-8 bg-white p-6 rounded-3xl shadow-sm">
+        <h2 id="current-tab-title" class="text-2xl font-bold">Konten & Landing Page</h2>
+        <button onclick="saveAllSettings()" class="bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700 transition font-semibold">
+          <i class="fas fa-save mr-2"></i> Simpan Perubahan
+        </button>
+      </header>
 
-      <div id="admin-dashboard" class="hidden">
-        <div class="grid gap-6 lg:grid-cols-[260px_1fr]">
-          <nav class="bg-white rounded-3xl shadow-xl p-6 space-y-4">
-            <button data-tab="content" class="tab-btn w-full text-left rounded-2xl px-4 py-3 bg-slate-100 font-semibold">Konten & Landing Page</button>
-            <button data-tab="images" class="tab-btn w-full text-left rounded-2xl px-4 py-3 hover:bg-slate-100 transition">Upload Gambar</button>
-            <button data-tab="users" class="tab-btn w-full text-left rounded-2xl px-4 py-3 hover:bg-slate-100 transition">Manajemen User</button>
-            <button data-tab="leads" class="tab-btn w-full text-left rounded-2xl px-4 py-3 hover:bg-slate-100 transition">Leads / Form</button>
-            <button data-tab="seo" class="tab-btn w-full text-left rounded-2xl px-4 py-3 hover:bg-slate-100 transition">SEO & Sosial Media</button>
-          </nav>
-
-          <section class="space-y-6">
-            <div class="rounded-3xl bg-white shadow-xl p-6">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <h2 class="text-2xl font-bold">Panel Backoffice</h2>
-                  <p class="text-slate-500">Simpan perubahan untuk memperbarui landing page secara langsung.</p>
-                </div>
-                <button id="save-settings" class="bg-green-600 text-white rounded-2xl px-5 py-3 hover:bg-green-700 transition">Simpan Semua</button>
-              </div>
+      <section id="tab-content" class="tab-panel space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-xl">
+          <h3 class="font-bold mb-4 border-b pb-2">Hero Section</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Judul Hero</label>
+              <input id="hero-title-input" type="text" class="w-full p-3 border rounded-xl" placeholder="Masukkan judul utama">
             </div>
-
-            <div id="tab-content" class="space-y-6">
-              <article data-panel="content" class="panel bg-white rounded-3xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4">Konten & Landing Page</h3>
-                <div class="grid gap-4">
-                  <div>
-                    <label class="font-medium">Judul Hero</label>
-                    <input id="hero-title-input" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label class="font-medium">Deskripsi Hero</label>
-                    <textarea id="hero-subtitle-input" rows="3" class="w-full rounded-2xl border border-slate-300 px-4 py-3"></textarea>
-                  </div>
-                  <div>
-                    <label class="font-medium">Judul Fitur Utama</label>
-                    <input id="features-title-input" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label class="font-medium">Deskripsi Fitur Utama</label>
-                    <textarea id="features-description-input" rows="3" class="w-full rounded-2xl border border-slate-300 px-4 py-3"></textarea>
-                  </div>
-                  <div>
-                    <label class="font-medium">Judul Kontak</label>
-                    <input id="contact-heading-input" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label class="font-medium">Deskripsi Kontak</label>
-                    <textarea id="contact-text-input" rows="3" class="w-full rounded-2xl border border-slate-300 px-4 py-3"></textarea>
-                  </div>
-                </div>
-                <div class="mt-6 grid gap-4 md:grid-cols-2">
-                  <div class="space-y-4">
-                    <h4 class="font-semibold">Feature Card 1</h4>
-                    <input id="feature-1-title" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Judul" />
-                    <textarea id="feature-1-desc" rows="2" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Deskripsi"></textarea>
-                  </div>
-                  <div class="space-y-4">
-                    <h4 class="font-semibold">Feature Card 2</h4>
-                    <input id="feature-2-title" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Judul" />
-                    <textarea id="feature-2-desc" rows="2" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Deskripsi"></textarea>
-                  </div>
-                  <div class="space-y-4">
-                    <h4 class="font-semibold">Feature Card 3</h4>
-                    <input id="feature-3-title" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Judul" />
-                    <textarea id="feature-3-desc" rows="2" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Deskripsi"></textarea>
-                  </div>
-                  <div class="space-y-4">
-                    <h4 class="font-semibold">Feature Card 4</h4>
-                    <input id="feature-4-title" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Judul" />
-                    <textarea id="feature-4-desc" rows="2" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="Deskripsi"></textarea>
-                  </div>
-                </div>
-              </article>
-
-              <article data-panel="images" class="panel hidden bg-white rounded-3xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4">Upload Gambar</h3>
-                <div class="grid gap-6 md:grid-cols-2">
-                  <div class="rounded-3xl border border-slate-200 p-5">
-                    <label class="font-medium">Logo</label>
-                    <input id="logo-upload" type="file" accept="image/*" class="mt-3" />
-                    <img id="logo-preview" src="" alt="Logo preview" class="mt-4 rounded-3xl w-full h-40 object-contain bg-slate-100" />
-                  </div>
-                  <div class="rounded-3xl border border-slate-200 p-5">
-                    <label class="font-medium">Hero Image</label>
-                    <input id="hero-image-upload" type="file" accept="image/*" class="mt-3" />
-                    <img id="hero-image-preview" src="" alt="Hero preview" class="mt-4 rounded-3xl w-full h-40 object-cover bg-slate-100" />
-                  </div>
-                  <div class="rounded-3xl border border-slate-200 p-5 md:col-span-2">
-                    <label class="font-medium">Banner / Background</label>
-                    <input id="banner-upload" type="file" accept="image/*" class="mt-3" />
-                    <img id="banner-preview" src="" alt="Banner preview" class="mt-4 rounded-3xl w-full h-40 object-cover bg-slate-100" />
-                  </div>
-                </div>
-              </article>
-
-              <article data-panel="users" class="panel hidden bg-white rounded-3xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4">Manajemen User</h3>
-                <p class="text-slate-500 mb-4">Daftar akun admin dan hak akses (opsional).</p>
-                <div class="grid gap-4">
-                  <div class="flex flex-col gap-3 md:flex-row md:items-end">
-                    <div class="flex-1">
-                      <label class="font-medium">Username</label>
-                      <input id="new-user-username" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="admin" />
-                    </div>
-                    <div class="flex-1">
-                      <label class="font-medium">Password</label>
-                      <input id="new-user-password" type="password" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="1234" />
-                    </div>
-                    <div>
-                      <label class="font-medium">Role</label>
-                      <select id="new-user-role" class="w-full rounded-2xl border border-slate-300 px-4 py-3">
-                        <option value="admin">Admin</option>
-                        <option value="editor">Editor</option>
-                      </select>
-                    </div>
-                    <button id="add-user-btn" class="bg-green-600 text-white rounded-2xl px-5 py-3 hover:bg-green-700 transition">Tambah User</button>
-                  </div>
-                  <div id="user-list" class="space-y-3"></div>
-                </div>
-              </article>
-
-              <article data-panel="leads" class="panel hidden bg-white rounded-3xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4">Leads / Data Form</h3>
-                <p class="text-slate-500 mb-4">Melihat data user yang mengisi form landing page.</p>
-                <div id="leads-table" class="overflow-x-auto">
-                  <div class="bg-slate-50 rounded-xl p-4 mb-4">
-                    <h4 class="font-semibold text-lg mb-2 flex items-center gap-2">
-                      <i class="fas fa-list text-green-600"></i>Leads Lengkap (Nama, Email, Subjek, Pesan)
-                    </h4>
-                    <p class="text-sm text-slate-500">Data form hubungi-kami.html & landing page</p>
-                  </div>
-                </div>
-              </article>
-
-              <article data-panel="seo" class="panel hidden bg-white rounded-3xl shadow-xl p-6">
-                <h3 class="text-xl font-bold mb-4">SEO & Sosial Media</h3>
-                <div class="grid gap-4">
-                  <div>
-                    <label class="font-medium">Meta Title</label>
-                    <input id="seo-title-input" type="text" class="w-full rounded-2xl border border-slate-300 px-4 py-3" />
-                  </div>
-                  <div>
-                    <label class="font-medium">Meta Description</label>
-                    <textarea id="seo-description-input" rows="3" class="w-full rounded-2xl border border-slate-300 px-4 py-3"></textarea>
-                  </div>
-                  <div class="grid gap-4 md:grid-cols-2">
-                    <div>
-                      <label class="font-medium">Link Facebook</label>
-                      <input id="social-facebook-input" type="url" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="https://facebook.com/..." />
-                    </div>
-                    <div>
-                      <label class="font-medium">Link Instagram</label>
-                      <input id="social-instagram-input" type="url" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="https://instagram.com/..." />
-                    </div>
-                    <div>
-                      <label class="font-medium">Link YouTube</label>
-                      <input id="social-youtube-input" type="url" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="https://youtube.com/..." />
-                    </div>
-                    <div>
-                      <label class="font-medium">Link WhatsApp</label>
-                      <input id="social-whatsapp-input" type="url" class="w-full rounded-2xl border border-slate-300 px-4 py-3" placeholder="https://wa.me/..." />
-                    </div>
-                  </div>
-                </div>
-              </article>
+            <div>
+              <label class="block text-sm font-medium mb-1">Sub-judul Hero</label>
+              <textarea id="hero-subtitle-input" class="w-full p-3 border rounded-xl h-24"></textarea>
             </div>
-          </section>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section id="tab-images" class="tab-panel hidden space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-3xl shadow-xl text-center">
+            <h3 class="font-bold mb-4">Logo Website</h3>
+            <div class="border-2 border-dashed rounded-2xl p-4">
+              <img id="logo-preview" class="h-32 mx-auto mb-4 object-contain">
+              <input type="file" id="logo-upload" class="hidden" accept="image/*">
+              <button onclick="document.getElementById('logo-upload').click()" class="text-green-600 font-semibold">Pilih Gambar</button>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-3xl shadow-xl text-center">
+            <h3 class="font-bold mb-4">Hero Background</h3>
+            <div class="border-2 border-dashed rounded-2xl p-4">
+              <img id="hero-preview" class="h-32 mx-auto mb-4 object-cover">
+              <input type="file" id="hero-upload" class="hidden" accept="image/*">
+              <button onclick="document.getElementById('hero-upload').click()" class="text-green-600 font-semibold">Pilih Gambar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-users" class="tab-panel hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-xl">
+          <div class="flex gap-4 mb-6">
+            <input id="new-email" type="email" placeholder="Email Admin" class="flex-1 p-3 border rounded-xl">
+            <input id="new-password" type="password" placeholder="Password" class="flex-1 p-3 border rounded-xl">
+            <button onclick="addUser()" class="bg-green-600 text-white px-6 rounded-xl">Tambah</button>
+          </div>
+          <table class="w-full">
+            <thead class="bg-slate-50">
+              <tr><th class="p-4 text-left">User Email</th><th class="p-4">Aksi</th></tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-leads" class="tab-panel hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-xl">
+          <h3 class="font-bold mb-4 border-b pb-2">Leads / Kontak Masuk</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-slate-50">
+                <tr>
+                  <th class="p-4 text-left">Nama</th>
+                  <th class="p-4 text-left">Email</th>
+                  <th class="p-4 text-left">Pesan</th>
+                  <th class="p-4 text-left">Waktu</th>
+                </tr>
+              </thead>
+              <tbody id="leads-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-seo" class="tab-panel hidden space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-xl grid gap-6">
+          <h3 class="font-bold mb-4 border-b pb-2">SEO & Sosial Media</h3>
+          <div class="grid gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Judul SEO</label>
+              <input id="seo-title-input" type="text" class="w-full p-3 border rounded-xl" placeholder="Judul halaman untuk SEO">
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Deskripsi SEO</label>
+              <textarea id="seo-description-input" class="w-full p-3 border rounded-xl h-24" placeholder="Deskripsi meta untuk SEO"></textarea>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Link Facebook</label>
+              <input id="social-facebook-input" type="url" class="w-full p-3 border rounded-xl" placeholder="https://facebook.com/..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Link Instagram</label>
+              <input id="social-instagram-input" type="url" class="w-full p-3 border rounded-xl" placeholder="https://instagram.com/..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Link YouTube</label>
+              <input id="social-youtube-input" type="url" class="w-full p-3 border rounded-xl" placeholder="https://youtube.com/..." />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Link WhatsApp</label>
+              <input id="social-whatsapp-input" type="url" class="w-full p-3 border rounded-xl" placeholder="https://wa.me/..." />
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <script src="../bacend/script.js"></script>
     </main>
   </div>
 
-  <script src="../bacend/admin.js"></script>
-</body>
+  <script>
+    function showTab(tab, btn) {
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+      const target = document.getElementById(`tab-${tab}`);
+      if (target) target.classList.remove('hidden');
+      document.getElementById('current-tab-title').textContent = {
+        content: 'Konten & Landing Page',
+        images: 'Manajemen Gambar',
+        users: 'Manajemen User',
+        leads: 'Leads & Form',
+        seo: 'SEO & Sosial Media'
+      }[tab] || 'Konten & Landing Page';
+      document.querySelectorAll('.sidebar-btn').forEach(button => button.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
 
+    function handleImageUpload(inputId, previewId, imageKey) {
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      if (!input || !preview) return;
+
+      input.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          preview.src = reader.result;
+          const settings = getBackofficeSettings();
+          settings.images = settings.images || {};
+          settings.images[imageKey] = reader.result;
+          saveBackofficeSettings(settings);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderUsers() {
+      if (typeof getBackofficeSettings !== 'function') return;
+      const settings = getBackofficeSettings();
+      const tbody = document.getElementById('users-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const users = settings.adminUsers || [];
+
+      if (!users.length) {
+        tbody.innerHTML = '<tr><td colspan="2" class="p-4 text-center text-sm text-slate-500">Belum ada admin tambahan.</td></tr>';
+        return;
+      }
+
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="p-4">${user.username || ''}</td>
+          <td class="p-4 text-center">
+            <button onclick="removeUser(${index})" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600">Hapus</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function renderLeads() {
+      if (typeof getBackofficeSettings !== 'function') return;
+      const settings = getBackofficeSettings();
+      const tbody = document.getElementById('leads-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const leads = settings.leads || [];
+
+      if (!leads.length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-sm text-slate-500">Belum ada leads masuk.</td></tr>';
+        return;
+      }
+
+      leads.slice().reverse().forEach((lead) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="p-4 align-top">${lead.name || '-'}</td>
+          <td class="p-4 align-top">${lead.email || '-'}</td>
+          <td class="p-4 align-top">${lead.message || '-'}</td>
+          <td class="p-4 align-top">${new Date(lead.createdAt).toLocaleString('id-ID') || '-'}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function addUser() {
+      if (typeof getBackofficeSettings !== 'function' || typeof saveBackofficeSettings !== 'function') return;
+      const email = document.getElementById('new-email').value.trim();
+      const password = document.getElementById('new-password').value.trim();
+      if (!email || !password) {
+        alert('Masukkan email dan password admin.');
+        return;
+      }
+      const settings = getBackofficeSettings();
+      settings.adminUsers = settings.adminUsers || [];
+      settings.adminUsers.push({ username: email, password, role: 'admin' });
+      saveBackofficeSettings(settings);
+      document.getElementById('new-email').value = '';
+      document.getElementById('new-password').value = '';
+      renderUsers();
+      alert('Admin baru berhasil ditambahkan.');
+    }
+
+    function removeUser(index) {
+      if (typeof getBackofficeSettings !== 'function' || typeof saveBackofficeSettings !== 'function') return;
+      const settings = getBackofficeSettings();
+      if (!Array.isArray(settings.adminUsers)) return;
+      settings.adminUsers.splice(index, 1);
+      saveBackofficeSettings(settings);
+      renderUsers();
+    }
+
+    function loadAdminSettings() {
+      if (typeof getBackofficeSettings !== 'function') return;
+      const settings = getBackofficeSettings();
+      document.getElementById('hero-title-input').value = settings.heroTitle || '';
+      document.getElementById('hero-subtitle-input').value = settings.heroSubtitle || '';
+      document.getElementById('seo-title-input').value = settings.seoTitle || '';
+      document.getElementById('seo-description-input').value = settings.seoDescription || '';
+      document.getElementById('social-facebook-input').value = settings.socialLinks?.facebook || '';
+      document.getElementById('social-instagram-input').value = settings.socialLinks?.instagram || '';
+      document.getElementById('social-youtube-input').value = settings.socialLinks?.youtube || '';
+      document.getElementById('social-whatsapp-input').value = settings.socialLinks?.whatsapp || '';
+
+      const logoPreview = document.getElementById('logo-preview');
+      if (logoPreview && settings.images?.logo) logoPreview.src = settings.images.logo;
+      const heroPreview = document.getElementById('hero-preview');
+      if (heroPreview && settings.images?.heroBackground) heroPreview.src = settings.images.heroBackground;
+
+      renderUsers();
+      renderLeads();
+    }
+
+    function saveAllSettings() {
+      if (typeof getBackofficeSettings !== 'function' || typeof saveBackofficeSettings !== 'function') {
+        alert('Sistem penyimpanan belum tersedia. Pastikan skrip backend terpasang.');
+        return;
+      }
+      const settings = getBackofficeSettings();
+      settings.heroTitle = document.getElementById('hero-title-input').value.trim();
+      settings.heroSubtitle = document.getElementById('hero-subtitle-input').value.trim();
+      settings.seoTitle = document.getElementById('seo-title-input').value.trim();
+      settings.seoDescription = document.getElementById('seo-description-input').value.trim();
+      settings.socialLinks = settings.socialLinks || {};
+      settings.socialLinks.facebook = document.getElementById('social-facebook-input').value.trim();
+      settings.socialLinks.instagram = document.getElementById('social-instagram-input').value.trim();
+      settings.socialLinks.youtube = document.getElementById('social-youtube-input').value.trim();
+      settings.socialLinks.whatsapp = document.getElementById('social-whatsapp-input').value.trim();
+      const logoPreview = document.getElementById('logo-preview');
+      const heroPreview = document.getElementById('hero-preview');
+      settings.images = settings.images || {};
+      if (logoPreview && logoPreview.src) settings.images.logo = logoPreview.src;
+      if (heroPreview && heroPreview.src) settings.images.heroBackground = heroPreview.src;
+      saveBackofficeSettings(settings);
+      renderLeads();
+      alert('Perubahan LMS berhasil disimpan.');
+    }
+
+    function initializeAdminPage() {
+      if (typeof getBackofficeSettings !== 'function') return;
+      handleImageUpload('logo-upload', 'logo-preview', 'logo');
+      handleImageUpload('hero-upload', 'hero-preview', 'heroBackground');
+      loadAdminSettings();
+    }
+
+    window.addEventListener('DOMContentLoaded', initializeAdminPage);
+  </script>
+</body>
 </html>

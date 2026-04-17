@@ -45,8 +45,9 @@ const defaultBackoffice = {
     whatsapp: 'https://wa.me/6285121045798'
   },
   images: {
-    logo: '../asset/Copilot_20260406_103147.png',
+    logo: '../asset/SkolUp.png',
     heroImage: '../asset/Copilot_20260401_082512.png',
+    heroBackground: '../asset/Copilot_20260401_082512.png',
     bannerImage: 'https://copilot.microsoft.com/th/id/BCO.7239c462-6f49-478c-aabc-93c805f71db4.png'
   },
   leads: []
@@ -165,9 +166,12 @@ function applyLandingPageSettings() {
   const heroImage = document.querySelector('img[alt="Hero Image - LMS Student"]');
   if (heroImage) heroImage.src = settings.images.heroImage;
 
-  const sectionHome = document.getElementById('home');
-  if (sectionHome && settings.images.bannerImage) {
-    sectionHome.style.backgroundImage = `url('${settings.images.bannerImage}')`;
+  const sectionHome = document.getElementById('home') || document.getElementById('beranda');
+  const heroBackground = settings.images.heroBackground || settings.images.bannerImage;
+  if (sectionHome && heroBackground) {
+    sectionHome.style.backgroundImage = `url('${heroBackground}')`;
+    sectionHome.style.backgroundSize = 'cover';
+    sectionHome.style.backgroundPosition = 'center';
   }
 
   const navLogo = document.querySelector('nav .logo img');
@@ -219,27 +223,37 @@ function toggleMobileMenu() {
   const mobileMenu = document.getElementById('mobile-menu');
   const body = document.body;
   const overlay = document.getElementById('mobile-overlay') || createMobileOverlay();
-  
-  mobileMenu.classList.toggle('active');
-  overlay.classList.toggle('active');
+  if (!mobileMenu) return;
+
+  mobileMenu.classList.toggle('hidden');
   body.classList.toggle('no-scroll');
-  
+
+  const isOpen = !mobileMenu.classList.contains('hidden');
+  if (isOpen) {
+    overlay.classList.remove('opacity-0', 'invisible');
+    overlay.classList.add('opacity-100', 'visible');
+  } else {
+    overlay.classList.remove('opacity-100', 'visible');
+    overlay.classList.add('opacity-0', 'invisible');
+  }
+
   // Close when clicking outside
-  overlay.onclick = () => toggleMobileMenu();
+  overlay.onclick = () => {
+    if (!mobileMenu.classList.contains('hidden')) toggleMobileMenu();
+  };
 }
 
 function createMobileOverlay() {
   const overlay = document.createElement('div');
   overlay.id = 'mobile-overlay';
   overlay.className = 'fixed inset-0 bg-black/50 z-40 lg:hidden opacity-0 invisible transition-all duration-300';
-  overlay.classList.toggle('active', true);
   document.body.appendChild(overlay);
   return overlay;
 }
 
 // Enhanced DOMContentLoaded mobile init
 document.addEventListener('DOMContentLoaded', () => {
-  const mobileBtn = document.getElementById('mobile-menu-button');
+  const mobileBtn = document.getElementById('mobile-menu-button') || document.getElementById('mobile-menu-btn');
   if (mobileBtn) {
     mobileBtn.onclick = toggleMobileMenu;
     
@@ -256,7 +270,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     if (e.target.closest('.mobile-nav-link')) {
       setTimeout(() => {
-        toggleMobileMenu();
+        if (document.getElementById('mobile-menu') && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+          toggleMobileMenu();
+        }
       }, 200);
     }
   });
@@ -277,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enhanced back-to-top with mobile positioning
   const backToTopButton = document.createElement('button');
   backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-  backToTopButton.className = 'fixed bottom-6 right-6 lg:bottom-8 lg:right-8 w-12 h-12 rounded-full bg-green-600 text-white shadow-lg hover:shadow-xl hover:bg-green-700 active:scale-95 transition-all duration-200 z-40 md:w-14 md:h-14';
+  backToTopButton.className = 'fixed bottom-4 right-4 sm:bottom-5 sm:right-5 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8 w-12 h-12 sm:w-13 sm:h-13 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-green-600 text-white shadow-lg hover:shadow-xl hover:bg-green-700 active:scale-95 transition-all duration-200 z-40';
   backToTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   document.body.appendChild(backToTopButton);
 
@@ -326,3 +342,52 @@ function closePopup() {
   }
 }
 
+// Fungsi untuk mengambil data dari Firebase dan memperbarui tampilan LMS
+function fetchLandingPageData() {
+  // Update Konten Hero & Fitur
+  db.ref('landing').on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      // Update Teks Hero
+      if (data.heroTitle) document.getElementById('hero-title').innerText = data.heroTitle;
+      if (data.heroSubtitle) document.getElementById('hero-subtitle').innerText = data.heroSubtitle;
+      
+      // Update Teks Kontak (Footer/Section Kontak)
+      const contactHeading = document.querySelector('#contact h2');
+      if (contactHeading && data.contactHeading) contactHeading.innerText = data.contactHeading;
+    }
+  });
+
+  // Update SEO (Title & Favicon)
+  db.ref('seo').on('value', (snapshot) => {
+    const seo = snapshot.val();
+    if (seo) {
+      if (seo.title) document.title = seo.title;
+      // Update link WhatsApp jika ada tombol WA
+      const waBtn = document.querySelector('a[href*="wa.me"]');
+      if (waBtn && seo.whatsapp) waBtn.href = `https://wa.me/${seo.whatsapp}`;
+    }
+  });
+}
+
+// Jalankan fungsi saat halaman dimuat
+if (typeof db !== 'undefined' && db && typeof db.ref === 'function') {
+  document.addEventListener('DOMContentLoaded', fetchLandingPageData);
+}
+
+function sendLead(event) {
+  event.preventDefault();
+  const name = document.getElementById('name-input').value;
+  const email = document.getElementById('email-input').value;
+  const message = document.getElementById('message-input').value;
+
+  db.ref('leads').push({
+    name: name,
+    email: email,
+    message: message,
+    date: new Date().toLocaleString('id-ID')
+  }).then(() => {
+    alert('Pesan berhasil dikirim!');
+    event.target.reset();
+  });
+}

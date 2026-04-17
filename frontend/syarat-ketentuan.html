@@ -1,202 +1,173 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
+
 <head>
-  <link rel="icon" href="../asset/logo.png" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Syarat & Ketentuan - ZMI LMS</title>
-  <meta name="description" content="Syarat dan ketentuan penggunaan ZMI LMS. Kebijakan privasi dan penggunaan layanan." />
+  <title>Syarat & Ketentuan - Skol-up LMS</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .hero-gradient { background: linear-gradient(rgba(57, 177, 101, 0.8), rgba(25, 51, 27, 0.9)); }
+    .term-section { scroll-margin-top: 8rem; }
   </style>
 </head>
-<body class="bg-white text-gray-800">
+
+<body class="bg-gray-50 text-gray-900">
+
   <!-- Nav -->
-  <nav class="fixed w-full z-50 flex justify-between items-center px-6 md:px-12 py-4 bg-white/95 backdrop-blur-md shadow-sm">
-    <div class="logo flex items-center gap-2">
-      <img src="../asset/Copilot_20260406_103147.png" alt="Logo" class="h-12 w-auto">
-    </div>
-<ul class="hidden lg:flex space-x-8 text-sm font-medium uppercase tracking-wide">
-      <li><a href="LMS.html#home" class="hover:text-green-600 transition-colors">Beranda</a></li>
-      <li><a href="LMS.html#about" class="hover:text-green-600 transition-colors">Tentang Kami</a></li>
-      <li><a href="LMS.html#features" class="hover:text-green-600 transition-colors">Fitur Utama</a></li>
-      <li><a href="LMS.html#workflow" class="hover:text-green-600 transition-colors">Alur Kerja</a></li>
-      <li class="relative">
-        <span class="text-green-600 font-bold cursor-pointer flex items-center gap-1" onclick="toggleDropdown()">Bantuan <i class="fas fa-chevron-down text-xs"></i></span>
-        <div id="bantuan-dropdown" class="absolute hidden bg-white shadow-xl rounded-xl mt-2 py-2 w-48 z-50 border border-gray-200">
-          <a href="faq.html" class="block px-4 py-2 hover:bg-green-50 text-sm">FAQ</a>
-          <a href="hubungi-kami.html" class="block px-4 py-2 hover:bg-green-50 text-sm">Hubungi Kami</a>
-          <a href="syarat-ketentuan.html" class="block px-4 py-2 hover:bg-green-50 text-sm bg-green-50 text-green-600">Syarat & Ketentuan</a>
+  <nav class="sticky top-0 z-50 bg-white shadow-sm border-b">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="LMS.html" class="flex items-center gap-3 font-bold text-xl">
+          <div class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center text-white">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          Skol-up
+        </a>
+        <div class="flex items-center gap-4 text-sm">
+          <a href="Pusat-Bantuan.html" class="text-green-600 font-semibold hover:underline">Pusat Bantuan</a>
+          <a href="LMS.html" class="hover:underline">Beranda</a>
         </div>
-      </li>
-    </ul>
-
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" aria-label="Toggle Menu">
-      <i class="fas fa-bars text-xl text-slate-900"></i>
-    </button>
-
-    <!-- Mobile Menu Off-Canvas -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white shadow-2xl transform translate-x-full z-50 lg:hidden transition-transform duration-300 ease-in-out">
-      <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="../asset/Copilot_20260406_103147.png" alt="Logo" class="h-10 w-auto">
-          <span class="font-bold text-lg">ZMI LMS</span>
-        </div>
-        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all" aria-label="Close Menu">
-          <i class="fas fa-times text-xl text-slate-900"></i>
-        </button>
-      </div>
-      
-      <nav class="p-6 space-y-4 pt-4">
-        <a href="LMS.html#home" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-home mr-3"></i>Beranda
-        </a>
-        <a href="LMS.html#about" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-info-circle mr-3"></i>Tentang Kami
-        </a>
-        <a href="LMS.html#features" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-star mr-3"></i>Fitur Utama
-        </a>
-        <a href="LMS.html#workflow" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-cogs mr-3"></i>Alur Kerja
-        </a>
-        <a href="faq.html" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-question-circle mr-3"></i>FAQ
-        </a>
-        <a href="hubungi-kami.html" class="block py-3 px-4 rounded-xl font-medium hover:bg-green-50 hover:text-green-600 transition-all border-l-4 border-transparent hover:border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-envelope mr-3"></i>Hubungi Kami
-        </a>
-        <a href="syarat-ketentuan.html" class="block py-3 px-4 rounded-xl font-medium bg-green-50 text-green-600 border-l-4 border-green-500" onclick="toggleMobileMenu()">
-          <i class="fas fa-file-contract mr-3"></i>Syarat & Ketentuan
-        </a>
-      </nav>
-      
-      <div class="p-6 border-t border-gray-200 mt-auto">
-        <a href="LMS.html" class="w-full block bg-green-600 text-white py-3 px-6 rounded-xl font-semibold text-center hover:bg-green-700 transition-all shadow-md">
-          Kembali Beranda
-        </a>
       </div>
     </div>
-    <a href="LMS.html" class="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-all md:ml-auto">Kembali ke Beranda</a>
   </nav>
 
-  <section class="relative min-h-screen flex items-center bg-cover bg-center pt-20" style="background-image: url('../asset/bg.png');">
-    <div class="absolute inset-0 hero-gradient"></div>
-    <div class="container mx-auto px-6 relative z-10 text-white">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-6">Syarat & Ketentuan</h1>
-        <p class="text-xl md:text-2xl mb-12">Penggunaan layanan ZMI Learning Management System</p>
-        <a href="#terms-content" class="bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all">Baca Syarat Lengkap</a>
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-orange-500 to-red-600 text-white py-24">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/20 px-6 py-3 rounded-full mb-8">
+        <i class="fas fa-file-contract"></i>
+        <span class="font-semibold">Syarat & Ketentuan</span>
       </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Ketentuan Penggunaan</h1>
+      <p class="text-xl opacity-90 max-w-2xl mx-auto">Dengan menggunakan Skol-up LMS, Anda setuju dengan ketentuan ini</p>
     </div>
   </section>
 
-  <section id="terms-content" class="py-24">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="bg-white rounded-3xl shadow-2xl p-12 space-y-12" data-aos="fade-up">
-        <div>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b border-gray-200 pb-4">1. Penerimaan Syarat</h2>
-          <p class="text-lg text-gray-700 leading-relaxed">Dengan mengakses dan menggunakan ZMI LMS, Anda menyetujui dan terikat pada syarat dan ketentuan berikut. Jika tidak setuju, mohon tidak menggunakan layanan kami.</p>
-        </div>
+  <!-- Content -->
+  <div class="max-w-4xl mx-auto px-6 pb-24 space-y-16">
+    
+    <!-- 1. Penerimaan Syarat -->
+    <section id="penerimaan" class="term-section bg-white rounded-3xl p-12 shadow-xl">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">1. Penerimaan Syarat & Ketentuan</h2>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-xl leading-relaxed">Dengan mengakses atau menggunakan platform Skol-up LMS (termasuk aplikasi web, dashboard, dan layanan terkait), Anda menyatakan bahwa:</p>
+        <ul class="mt-8 space-y-3 text-lg list-disc list-inside">
+          <li>Anda berusia minimal 18 tahun atau memiliki persetujuan wali hukum</li>
+          <li>Anda memiliki hak untuk merepresentasikan sekolah/instansi</li>
+          <li>Telah membaca, memahami, dan menerima syarat ini sepenuhnya</li>
+        </ul>
+      </div>
+    </section>
 
+    <!-- 2. Akun & Keamanan -->
+    <section id="akun" class="term-section bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-12 shadow-xl">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">2. Akun Pengguna & Keamanan</h2>
+      <div class="grid md:grid-cols-2 gap-12">
         <div>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b border-gray-200 pb-4">2. Akun & Keamanan</h2>
-          <ul class="space-y-3 text-lg text-gray-700">
-            <li>• Anda bertanggung jawab menjaga kerahasiaan kredensial akun</li>
-            <li>• Segera laporkan dugaan penggunaan tidak sah</li>
-            <li>• Kami berhak menangguhkan akun yang melanggar aturan</li>
+          <h3 class="text-2xl font-semibold mb-6">Tanggung Jawab Akun</h3>
+          <ul class="space-y-3 mb-8">
+            <li><strong>Login aman:</strong> Jangan bagikan kredensial akun</li>
+            <li><strong>Update rutin:</strong> Gunakan password kuat (min 8 karakter)</li>
+            <li><strong>Logout:</strong> Selalu logout di perangkat umum</li>
           </ul>
         </div>
-
         <div>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b border-gray-200 pb-4">3. Penggunaan Layanan</h2>
-          <ul class="space-y-3 text-lg text-gray-700">
-            <li>• Hanya untuk tujuan pendidikan yang sah</li>
-            <li>• Dilarang konten ilegal, spam, atau pelanggaran hak cipta</li>
-            <li>• Kapasitas upload dibatasi sesuai paket berlangganan</li>
+          <h3 class="text-2xl font-semibold mb-6">Konsekuensi Pelanggaran</h3>
+          <ul class="space-y-3 text-red-700">
+            <li>Akun dinonaktifkan sementara (7 hari)</li>
+            <li>Suspensi permanen untuk pelanggaran berat</li>
+            <li>Data akademik tetap aman & ter-backup</li>
           </ul>
-        </div>
-
-        <div>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b border-gray-200 pb-4">4. Pembayaran & Langganan</h2>
-          <p class="text-lg text-gray-700 leading-relaxed">Biaya berlangganan non-refundable. Pembayaran bulanan/tahunan via transfer bank. Layanan otomatis renew kecuali dibatalkan 7 hari sebelumnya.</p>
-        </div>
-
-        <div>
-          <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b border-gray-200 pb-4">5. Data & Privasi</h2>
-          <p class="text-lg text-gray-700 leading-relaxed">Kami mengumpulkan data untuk meningkatkan layanan. Data nilai siswa terenkripsi. Lihat <a href="#" class="text-green-600 hover:underline">Kebijakan Privasi</a> lengkap.</p>
-        </div>
-
-        <div class="text-center pt-12 border-t border-gray-200">
-          <p class="text-2xl font-bold text-slate-900 mb-4">Terakhir Diperbarui: 1 Januari 2025</p>
-          <a href="hubungi-kami.html" class="bg-green-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-green-700 transition-all">Ada Pertanyaan? Hubungi Kami</a>
         </div>
       </div>
+    </section>
+
+    <!-- 3. Hak Kekayaan Intelektual -->
+    <section id="hak-cipta" class="term-section bg-white rounded-3xl p-12 shadow-xl">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">3. Hak Kekayaan Intelektual</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Milik Skol-up:</h3>
+          <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+            <li>Kode sumber & algoritma LMS</li>
+            <li>Template dashboard & UI/UX</li>
+            <li>Brand "Skol-up" & logo</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-green-700">Milik Anda:</h3>
+          <ul class="list-disc list-inside space-y-2 mb-6 text-green-700">
+            <li>Materi pembelajaran (RPP, slide, PDF)</li>
+            <li>Data nilai & progres siswa</li>
+            <li>Bank soal ujian</li>
+            <li>Laporan hasil belajar</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-8 mt-12">
+        <h4 class="font-bold text-lg mb-3 flex items-center gap-2">
+          <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+          Pelanggaran Hak Cipta
+        </h4>
+        <p>Upload konten bajakan → akun suspended + laporan ke pihak berwenang</p>
+      </div>
+    </section>
+
+    <!-- 4. Tanggung Jawab & Batasan -->
+    <section id="tanggung-jawab" class="term-section bg-white rounded-3xl p-12 shadow-xl">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">4. Tanggung Jawab & Batasan</h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-semibold mb-6">Kami Menjamin:</h3>
+          <ul class="space-y-3 text-lg text-green-800">
+            <li>99.9% uptime (SLA)</li>
+            <li>Data aman & backup harian</li>
+            <li>Support responsif 24/7</li>
+            <li>Update fitur bulanan</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold mb-6 text-red-700">Bukan Tanggung Jawab:</h3>
+          <ul class="space-y-3 text-lg text-red-700">
+            <li>Data loss karena malware di perangkat user</li>
+            <li>Internet/sinyal sekolah</li>
+            <li>Kebijakan sekolah/kurikulum</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="text-center py-20 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-3xl shadow-2xl">
+      <h2 class="text-3xl font-bold mb-6">Mulai Gunakan Skol-up LMS</h2>
+      <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Dengan memahami & menerima syarat ini, Anda siap mentransformasi pengajaran</p>
+      <a href="LMS.html" class="inline-flex items-center gap-3 bg-white text-green-600 px-12 py-5 rounded-3xl font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl">
+        <i class="fas fa-rocket"></i>
+        Mulai Gratis
+      </a>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-700 text-white py-12 px-6">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div>
-          <h3 class="font-bold text-lg mb-4">Alamat</h3>
-          <p class="text-sm leading-relaxed text-slate-300">Jl. Taman Pahlawan No.166, Purwamekar, Kec. Purwakarta, Kabupaten Purwakarta, Jawa Barat 41119</p>
-          <h3 class="font-bold text-lg mt-8 mb-4">Social Media</h3>
-          <div class="flex gap-4">
-            <a href="https://facebook.com" class="hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" class="hover:text-pink-400"><i class="fab fa-instagram"></i></a>
-            <a href="https://youtube.com" class="hover:text-red-500"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/6285121045798" class="hover:text-green-400"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Hubungi</h3>
-          <div class="space-y-3 text-sm">
-            <div class="flex items-center gap-3"><i class="fab fa-whatsapp text-lg"></i><span>6285121045798</span></div>
-            <div class="flex items-center gap-3"><i class="far fa-envelope text-lg"></i><span>info@zenmultimedia.co.id</span></div>
-          </div>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Product</h3>
-          <a href="https://www.ditiketin.com/" class="hover:underline">Ditiketin</a>
-        </div>
-        <div>
-          <h3 class="font-bold text-lg mb-4">Bantuan</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="faq.html" class="hover:underline">FAQ</a></li>
-            <li><a href="hubungi-kami.html" class="hover:underline">Hubungi Kami</a></li>
-            <li><a href="syarat-ketentuan.html" class="hover:underline">Syarat & Ketentuan</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-blue-800 mt-12 pt-8 text-center text-sm text-slate-400">
-        <p>© 2025 zenmultimedia.co.id</p>
-      </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <p>Syarat & Ketentuan Skol-up LMS © 2025 | Versi 2.1</p>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="../bacend/script.js"></script>
-<script>
-  AOS.init({ duration: 800, once: true });
-  function toggleDropdown() {
-    const dropdown = document.getElementById('bantuan-dropdown');
-    dropdown.classList.toggle('hidden');
-  }
-  document.addEventListener('click', function(e) {
-    const navBtn = document.querySelector('.relative span');
-    const dropdown = document.getElementById('bantuan-dropdown');
-    if (!navBtn.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.classList.add('hidden');
-    }
-  });
-</script>
+  <script>
+    // Smooth scroll & highlight TOC
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
+      });
+    });
+  </script>
+
 </body>
 </html>
+
