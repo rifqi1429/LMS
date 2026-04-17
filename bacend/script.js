@@ -252,6 +252,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Mobile nav link handler - prevent immediate close
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.mobile-nav-link')) {
+      setTimeout(() => {
+        toggleMobileMenu();
+      }, 200);
+    }
+  });
+
   // Close menu on resize to desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 1024) {
